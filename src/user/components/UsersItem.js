@@ -5,18 +5,18 @@ import Avatar from '../../shared/UIElements/Avatar';
 import Card from '../../shared/UIElements/Card';
 import './UsersItem.css';
 
-const UsersItem = props => {
+const UsersItem = userslistprops => {
     return (
         <li className="user-item">
             <Card className="user-item__content">
-                <Link to={`/${props.id}/places`}>
+                <Link to={`/${userslistprops.id}/places`}>
                     <div className="user-item__image">
-                        <Avatar image={props.image} alt={props.name} />
+                        <Avatar image={userslistprops.image} alt={userslistprops.name} />
                     </div>
                     <div className="user-item__info">
-                        <h2>{props.name}</h2>
+                        <h2>{userslistprops.name}</h2>
                         <h3>
-                            {props.placeCount} {props.placeCount === 1 ? 'Place' : 'Places'}
+                            {userslistprops.placeCount} {userslistprops.placeCount === 1 ? 'Place' : 'Places'}
                         </h3>
                     </div>
                 </Link>
