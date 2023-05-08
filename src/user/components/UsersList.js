@@ -3,8 +3,8 @@ import React from 'react';
 import UsersItem from './UsersItem';
 import './UsersList.css';
 
-const UsersList = usersprops => {
-    if (usersprops.items.length === 0) {
+const UsersList = Uprops => {
+    if (Uprops.items.length === 0) {
         return (
             <div className="center">
                 <h2>No users found.</h2>
@@ -14,10 +14,12 @@ const UsersList = usersprops => {
 
     return (
         <ul className="users-list">
-            {usersprops.items.map(user => (
+            {Uprops.items.map(user => (
                 <UsersItem key={user.id} id={user.id} image={user.image} name={user.name} placeCount={user.places} />
             ))}
         </ul>
     );
 };
 export default UsersList;
+
+// Uprops = Users props

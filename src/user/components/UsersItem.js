@@ -5,18 +5,18 @@ import Avatar from '../../shared/UIElements/Avatar';
 import Card from '../../shared/UIElements/Card';
 import './UsersItem.css';
 
-const UsersItem = userslistprops => {
+const UsersItem = ULprops => {
     return (
         <li className="user-item">
             <Card className="user-item__content">
-                <Link to={`/${userslistprops.id}/places`}>
+                <Link to={`/${ULprops.id}/places`}>
                     <div className="user-item__image">
-                        <Avatar image={userslistprops.image} alt={userslistprops.name} />
+                        <Avatar image={ULprops.image} alt={ULprops.name} />
                     </div>
                     <div className="user-item__info">
-                        <h2>{userslistprops.name}</h2>
+                        <h2>{ULprops.name}</h2>
                         <h3>
-                            {userslistprops.placeCount} {userslistprops.placeCount === 1 ? 'Place' : 'Places'}
+                            {ULprops.placeCount} {ULprops.placeCount === 1 ? 'Place' : 'Places'}
                         </h3>
                     </div>
                 </Link>
@@ -25,3 +25,5 @@ const UsersItem = userslistprops => {
     );
 };
 export default UsersItem;
+
+// ULprops = UsersList props

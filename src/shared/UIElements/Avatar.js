@@ -2,16 +2,14 @@ import React from 'react';
 
 import './Avatar.css';
 
-const Avatar = usersitemprops => {
+const Avatar = UIprops => {
     return (
-        <div className={`avatar ${usersitemprops.className}`} style={usersitemprops.style}>
-            <img
-                src={usersitemprops.image}
-                alt={usersitemprops.alt}
-                style={{ width: usersitemprops.width, height: usersitemprops.width }}
-            />
+        <div className={`avatar ${UIprops.className}`} style={UIprops.style}>
+            <img src={UIprops.image} alt={UIprops.alt} style={{ width: UIprops.width, height: UIprops.width }} />
         </div>
     );
 };
 
 export default Avatar;
+
+// UIprops = UsersIntem props
