@@ -12,4 +12,4 @@ const Avatar = UIprops => {
 
 export default Avatar;
 
-// UIprops = UsersIntem props
+// UIprops = UsersIntem styling props
