@@ -6,7 +6,7 @@ const Users = () => {
     const USERS = [
         {
             id: 'u1',
-            name: 'Model',
+            name: 'Jeniffer',
             image: 'https://global.cdn.magazord.com.br/topmodel/img/2023/03/produto/18985/l-blusa-termica-gola-careca-vera-top-model-preto.jpg?ims=fit-in/600x900/filters:fill(white)',
             places: 3
         }
