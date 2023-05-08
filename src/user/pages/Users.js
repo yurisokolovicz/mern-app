@@ -16,3 +16,5 @@ const Users = () => {
 };
 
 export default Users;
+
+// Props chain -> src/user/pages/Users.js -> src/user/components/UsersList.js -> src/user/components/UsersItem.js -> src/shared/UIElements/Avatar.js
