@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import './SideDrawer.css';
 
 const SideDrawer = props => {
-    return <aside className="side-drawer">{props.children}</aside>;
+    const content = <aside className="side-drawer">{props.children}</aside>;
+
+    return ReactDOM.createPortal(content, document.getElementById('drawer-hook'));
 };
 export default SideDrawer;
 
-// <aside> é um elemento HTML que representa uma seção de uma página que consiste em conteúdo que é tangencialmente relacionado ao conteúdo em torno dele, que poderia ser considerado separado dele. Essas seções são frequentemente representadas como barras laterais ou como inserções e contêm uma explicação lateral, como uma definição de glossário, elementos relacionados com o conteúdo principal como um formulário de inscrição ou elementos de navegação.
+// Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
