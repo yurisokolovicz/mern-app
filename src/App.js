@@ -3,20 +3,24 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
+import MainNavigation from './shared/components/Navigation/MainNavigation'; // This will include the MainHeader component
 
 const App = () => {
     return (
         <Router>
-            <Switch>
-                <Route path="/" exact>
-                    <Users />
-                </Route>
-                <Route path="/places/new" exact>
-                    <NewPlace />
-                </Route>
-                <Redirect to="/" />
-                {/* Redirect to the root path if the user tries to access any other path */}
-            </Switch>
+            <MainNavigation />
+            <main>
+                <Switch>
+                    <Route path="/" exact>
+                        <Users />
+                    </Route>
+                    <Route path="/places/new" exact>
+                        <NewPlace />
+                    </Route>
+                    <Redirect to="/" />
+                    {/* Redirect to the root path if the user tries to access any other path */}
+                </Switch>
+            </main>
         </Router>
     );
 };
