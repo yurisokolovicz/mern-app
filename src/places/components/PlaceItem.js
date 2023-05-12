@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Card from '../../shared/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
+import Map from '../../shared/components/UIElements/Map';
 import './PlaceItem.css';
 
 const PlaceItem = placeList => {
@@ -23,7 +24,7 @@ const PlaceItem = placeList => {
                 footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
             >
                 <div className="map-container">
-                    <h2>THE MAP!</h2>
+                    <Map center={placeList.coordinates} zoom={16} />
                 </div>
             </Modal>
             {/* onCancel come from the Modal component, it is a prop that we can use to close the modal when the user clicks on the backdrop. */}
