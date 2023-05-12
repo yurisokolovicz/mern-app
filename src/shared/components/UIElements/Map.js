@@ -4,7 +4,7 @@ import './Map.css';
 
 const Map = props => {
     const mapRef = useRef();
-    // Object destructuring - put elements out of the props object AND STORE THEM IN VARIABLES
+    // Object destructuring - put elements out of the props object AND STORE THEM IN VARIABLES.
     const { center, zoom } = props;
 
     useEffect(() => {
@@ -27,4 +27,5 @@ const Map = props => {
 
 export default Map;
 
-// Map.js recebe props de Map.css e Map.css recebe props de NewPlace.js
+// Map.js recebe props de Map.css
+// Map.js e utilizado em PlaceItem.js e la recebe props do placeList como props.
