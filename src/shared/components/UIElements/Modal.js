@@ -38,4 +38,4 @@ export default Modal;
 
 // <ModalOverlay {...placeItem} /> ...pros is the spread operator. It Takes the placeItem from Modal component (external component that we export) and forward all the placeItem to ModalOverlay (internal component which we do not export)
 
-// Modal is basically like a pop-up but built into the page, not in a new browser window.
+// Modal is basically like a pop-up but built into the page, not in a new browser window. It has a background where we can use this backdrop component which we already created. It has a header, content and footer. We can use this Modal component in any place of our application.
