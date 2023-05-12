@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from '../../shared/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
 import './PlaceItem.css';
 
 const PlaceItem = placeList => {
@@ -16,12 +17,14 @@ const PlaceItem = placeList => {
                     <p>{placeList.description}</p>
                 </div>
                 <div className="place-item__actions">
-                    <button>VIEW ON MAP</button>
-                    <button>EDIT</button>
-                    <button>DELETE</button>
+                    <Button inverse>VIEW ON MAP</Button>
+                    <Button to={`/places/${placeList.id}`}>EDIT</Button>
+                    <Button danger>DELETE</Button>
                 </div>
             </Card>
         </li>
     );
 };
 export default PlaceItem;
+
+// <Button inverse> the inverse prop, check the Button component to see how it is used (also the css of Button component).
