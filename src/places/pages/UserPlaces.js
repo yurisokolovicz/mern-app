@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import PlaceList from '../components/PlaceList';
 
@@ -26,6 +27,12 @@ const DUMMY_PLACES = [
 ];
 
 const UserPlaces = () => {
-    return <PlaceList items={DUMMY_PLACES} />;
+    const userId = useParams().userId;
+    const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId);
+    return <PlaceList items={loadedPlaces} />;
 };
 export default UserPlaces;
+
+// useParam() hook is used to extract dynamic segments from the URL. in ths case userId is the dynamic segment. So userParams().userId will give us the value of userId from the URL.
+
+// we use filter() method to filter out the places that are created by the user with the id that we extracted from the URL. place.creator === userId will return true if the place.creator is equal to the userId. It means that the place is created by the user with the id that we extracted from the URL.
