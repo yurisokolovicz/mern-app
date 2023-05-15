@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 
+import { validate } from '../../util/validators';
 import './Input.css';
 
 const inputReducer = (state, action) => {
@@ -8,32 +9,51 @@ const inputReducer = (state, action) => {
             return {
                 ...state, //copy the old state
                 value: action.val,
-                isValid: true
+                isValid: validate(action.val, action.validators)
             };
+        case 'TOUCH': {
+            return {
+                ...state,
+                isTouched: true // set isTouched to true when its is blurred (desfocado).
+            };
+        }
         default:
             return state;
     }
 };
 
-const Input = props => {
-    const [inputState, dispatch] = useReducer(inputReducer, { value: '', isValid: false });
+const Input = newPlace => {
+    const [inputState, dispatch] = useReducer(inputReducer, { value: '', isTouched: false, isValid: false });
 
     const changeHandler = event => {
-        dispatch({ type: 'CHANGE', val: event.target.value });
+        dispatch({ type: 'CHANGE', val: event.target.value, validators: newPlace.validators });
+    };
+
+    const touchHandler = () => {
+        dispatch({
+            type: 'TOUCH'
+        });
     };
 
     const element =
-        props.element === 'input' ? (
-            <input id={props.id} type={props.type} placeholder={props.placeholder} onChange={changeHandler} value={inputState.value} />
+        newPlace.element === 'input' ? (
+            <input
+                id={newPlace.id}
+                type={newPlace.type}
+                placeholder={newPlace.placeholder}
+                onChange={changeHandler}
+                onBlur={touchHandler}
+                value={inputState.value}
+            />
         ) : (
-            <textarea id={props.id} rows={props.rows || 3} onChange={changeHandler} value={inputState.value} /> // 3 is the default value if rows is not passed.
+            <textarea id={newPlace.id} rows={newPlace.rows || 3} onChange={changeHandler} value={inputState.value} onBlur={touchHandler} /> // 3 is the default value if rows is not passed.
         );
 
     return (
-        <div className={`form-control ${!inputState.isValid && 'form-control--invalid'}`}>
-            <label htmlFor={props.id}>{props.label}</label>
+        <div className={`form-control ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}>
+            <label htmlFor={newPlace.id}>{newPlace.label}</label>
             {element}
-            {!inputState.isValid && <p>{props.errorText}</p>}
+            {!inputState.isValid && inputState.isTouched && <p>{newPlace.errorText}</p>}
         </div>
     );
 };
