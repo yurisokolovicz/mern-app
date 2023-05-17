@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
@@ -30,24 +30,45 @@ const DUMMY_PLACES = [
 ];
 
 const UpdatePlace = () => {
+    const [isLoading, setIsLoading] = useState(true);
+
     const placeId = useParams().placeId;
-
-    const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
-
-    const [formState, inputHandler] = useForm(
+    // sefFormData is used to set the initial values of the form (we just use it in UpdatePlace.js, not in NewPlace.js)
+    const [formState, inputHandler, setFormData] = useForm(
         // getting back the formState and inputHandler from useForm() hook
         {
             title: {
-                value: identifiedPlace.title,
-                isValid: true
+                value: '',
+                isValid: false
             },
             description: {
-                value: identifiedPlace.description,
-                isValid: true
+                value: '',
+                isValid: false
             }
         },
-        true
+        false
     );
+
+    const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
+
+    // Here we must use useEffect to avoid infitit loop at setFormData function.
+    // Now the identifiedPlace will not change with every re-render cycle, because we are using useEffect. With this logic, we are telling React to only run this code when the identifiedPlace changes.
+    useEffect(() => {
+        setFormData(
+            {
+                title: {
+                    value: identifiedPlace.title,
+                    isValid: true
+                },
+                description: {
+                    value: identifiedPlace.description,
+                    isValid: true
+                }
+            },
+            true
+        );
+        setIsLoading(false);
+    }, [setFormData, identifiedPlace]);
 
     const placeUpdateSubmitHandler = event => {
         event.preventDefault();
@@ -58,6 +79,14 @@ const UpdatePlace = () => {
         return (
             <div className="center">
                 <h2>Could not find place!</h2>;
+            </div>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <div className="center">
+                <h2>Loading...</h2>;
             </div>
         );
     }

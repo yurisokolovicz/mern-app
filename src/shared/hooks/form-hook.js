@@ -20,6 +20,11 @@ const formReducer = (state, action) => {
                 },
                 isValid: formIsValid
             };
+        case 'SET_DATA':
+            return {
+                inputs: action.inputs,
+                isValid: action.formIsValid
+            };
         default:
             return state;
     }
@@ -32,10 +37,18 @@ export const useForm = (initialInputs, initialFormValidity) => {
         isValid: initialFormValidity
     });
 
-    // When we cal dispatch we re-render the component, so we need to use useCallback to avoid infinite loop.
+    // When we call dispatch we re-render the component, so we need to use useCallback to avoid infinite loop.
     const inputHandler = useCallback((id, value, isValid) => {
         dispatch({ type: 'INPUT_CHANGE', value: value, isValid: isValid, inputId: id });
     }, []);
+    // setFormData will also not change because we are using useCallback.
+    const setFormData = useCallback((inputData, formValidity) => {
+        dispatch({
+            type: 'SET_DATA',
+            inputs: inputData,
+            formIsValid: formValidity
+        });
+    }, []);
 
-    return [formState, inputHandler];
+    return [formState, inputHandler, setFormData];
 };
