@@ -3,7 +3,7 @@ import React, { useCallback, useReducer } from 'react';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../shared/util/validators';
-import './NewPlace.css';
+import './PlaceForm.css';
 
 // useCallback is used to avoid infinite loop. The useCallback will only be recreated if the dependencies change. If the function is reused (id, value, isValid), the function will not be recreated.
 
@@ -43,6 +43,10 @@ const NewPlace = () => {
                 isValid: false
             },
             description: {
+                value: '',
+                isValid: false
+            },
+            address: {
                 value: '',
                 isValid: false
             }
