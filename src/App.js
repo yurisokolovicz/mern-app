@@ -5,6 +5,7 @@ import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
 import MainNavigation from './shared/components/Navigation/MainNavigation'; // This will include the MainHeader component
 import UserPlaces from './places/pages/UserPlaces';
+import UpdatePlace from './places/pages/UpdatePlace';
 
 const App = () => {
     return (
@@ -20,6 +21,9 @@ const App = () => {
                     </Route>
                     <Route path="/places/new" exact>
                         <NewPlace />
+                    </Route>
+                    <Route path="/places/:placeId">
+                        <UpdatePlace />
                     </Route>
                     <Redirect to="/" />
                     {/* Redirect to the root path if the user tries to access any other path */}
