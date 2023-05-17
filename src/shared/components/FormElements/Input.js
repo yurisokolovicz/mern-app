@@ -25,9 +25,9 @@ const inputReducer = (state, action) => {
 // The props are the props that we pass to the Input component in NewPlace.js and UpdatePlace.js, so this is the reason we use props and not newPlace or UpdatePlace.
 const Input = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
-        value: props.value || '',
+        value: props.initialValue || '', // initialValue is passed to Input component in NewPlace.js and UpdatePlace.js
         isTouched: false,
-        isValid: props.valid || false
+        isValid: props.initialValid || false // initialValid is passed to Input component in NewPlace.js and UpdatePlace.js
     });
 
     const { id, onInput } = props;
