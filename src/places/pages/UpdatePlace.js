@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
+import Card from '../../shared/UIElements/Card';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook'; // Reducer custom hook
 import './PlaceForm.css';
@@ -20,7 +21,7 @@ const DUMMY_PLACES = [
     },
     {
         id: 'p2',
-        title: 'Empire State Building',
+        title: 'Emp. State Building',
         description: 'One of the most famous sky scrapers in the world!',
         imageUrl:
             'https://www.esbnyc.com/sites/default/files/styles/small_feature/public/2022-06/iStock-937427130%20%281%29.jpg?itok=osCyvhw5.jpg',
@@ -54,19 +55,21 @@ const UpdatePlace = () => {
     // Here we must use useEffect to avoid infitit loop at setFormData function.
     // Now the identifiedPlace will not change with every re-render cycle, because we are using useEffect. With this logic, we are telling React to only run this code when the identifiedPlace changes.
     useEffect(() => {
-        setFormData(
-            {
-                title: {
-                    value: identifiedPlace.title,
-                    isValid: true
+        if (identifiedPlace) {
+            setFormData(
+                {
+                    title: {
+                        value: identifiedPlace.title,
+                        isValid: true
+                    },
+                    description: {
+                        value: identifiedPlace.description,
+                        isValid: true
+                    }
                 },
-                description: {
-                    value: identifiedPlace.description,
-                    isValid: true
-                }
-            },
-            true
-        );
+                true
+            );
+        }
         setIsLoading(false);
     }, [setFormData, identifiedPlace]);
 
@@ -78,7 +81,9 @@ const UpdatePlace = () => {
     if (!identifiedPlace) {
         return (
             <div className="center">
-                <h2>Could not find place!</h2>;
+                <Card>
+                    <h2>Could not find place!</h2>;
+                </Card>
             </div>
         );
     }
