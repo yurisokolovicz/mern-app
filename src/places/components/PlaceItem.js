@@ -8,10 +8,24 @@ import './PlaceItem.css';
 
 const PlaceItem = placeList => {
     const [showMap, setShowMap] = useState(false); // This is a state that will be used to show the map when the user clicks on the VIEW ON MAP button. It is false by default because we dont want to show the modal when the user acess the page.
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const openMapHandler = () => setShowMap(true);
 
     const closeMapHandler = () => setShowMap(false);
+
+    const showDeleteWarningHandler = () => {
+        setShowConfirmModal(true);
+    };
+
+    const cancelDeleteHandler = () => {
+        setShowConfirmModal(false);
+    };
+
+    const confirmDeleteHandler = () => {
+        setShowConfirmModal(false); // to close the modal
+        console.log('DELETING...');
+    };
 
     return (
         <React.Fragment>
@@ -26,6 +40,24 @@ const PlaceItem = placeList => {
                 <div className="map-container">
                     <Map center={placeList.coordinates} zoom={16} />
                 </div>
+            </Modal>
+            <Modal
+                show={showConfirmModal}
+                onCancel={cancelDeleteHandler}
+                header="Are you sure?"
+                footerClass="place-item__modal-actions"
+                footer={
+                    <React.Fragment>
+                        <Button inverse onClick={cancelDeleteHandler}>
+                            CANCEL
+                        </Button>
+                        <Button danger onClick={confirmDeleteHandler}>
+                            DELETE
+                        </Button>
+                    </React.Fragment>
+                }
+            >
+                <p>Do you want to delete this place?</p>
             </Modal>
             {/* onCancel come from the Modal component, it is a prop that we can use to close the modal when the user clicks on the backdrop. */}
             <li className="place-item">
@@ -43,7 +75,9 @@ const PlaceItem = placeList => {
                             VIEW ON MAP
                         </Button>
                         <Button to={`/places/${placeList.id}`}>EDIT</Button>
-                        <Button danger>DELETE</Button>
+                        <Button danger onClick={showDeleteWarningHandler}>
+                            DELETE
+                        </Button>
                     </div>
                 </Card>
             </li>
