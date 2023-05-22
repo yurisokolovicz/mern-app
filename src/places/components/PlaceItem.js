@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Card from '../../shared/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
 import Map from '../../shared/components/UIElements/Map';
+import { AuthContext } from '../../shared/context/auth-context';
 import './PlaceItem.css';
 
 const PlaceItem = placeList => {
+    const auth = useContext(AuthContext);
     const [showMap, setShowMap] = useState(false); // This is a state that will be used to show the map when the user clicks on the VIEW ON MAP button. It is false by default because we dont want to show the modal when the user acess the page.
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -74,10 +76,12 @@ const PlaceItem = placeList => {
                         <Button inverse onClick={openMapHandler}>
                             VIEW ON MAP
                         </Button>
-                        <Button to={`/places/${placeList.id}`}>EDIT</Button>
-                        <Button danger onClick={showDeleteWarningHandler}>
-                            DELETE
-                        </Button>
+                        {auth.isLoggedIn && <Button to={`/places/${placeList.id}`}>EDIT</Button>}
+                        {auth.isLoggedIn && (
+                            <Button danger onClick={showDeleteWarningHandler}>
+                                DELETE
+                            </Button>
+                        )}
                     </div>
                 </Card>
             </li>
